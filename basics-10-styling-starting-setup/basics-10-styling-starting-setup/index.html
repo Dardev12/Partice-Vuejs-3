@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Vue Dynamic Styling</h1>
+    </header>
+    <section id="styling">
+      <!-- Setup un style css dynamiquement -->
+      <div class="demo" 
+      :style="{borderColor: boxASelected ? 'green' : '#ccc'}" 
+       @click="boxSelected('A')"></div>
+       <!-- autre manière de call un css. faut toujours le bind -->
+      <div :class="boxBSelected ? 'demo active' : 'demo' " 
+      @click="boxSelected('B')"></div>
+      <div :class="boxAClasses" @click="boxSelected('C')"></div>
+      <!--Vue ne peut pas avoir plusieurs classe ensemble -->
+      <!-- Conseil sous forme de ARRAY [] on peut stockez ce dont on a besoin 5-->
+    </section>
+  </body>
+</html>

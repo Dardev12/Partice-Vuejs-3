@@ -1,0 +1,56 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Form Input Binding</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.js"
+    integrity="sha256-kzv+r6dLqmz7iYuR2OdwUgl4X5RVsoENBzigdF5cxtU=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div id="app">
+    <form>
+      <div>
+        <label>Name:</label> <input v-model="name">
+      </div>
+      <div>
+        <label>Decription:</label> <textarea v-model="desc"></textarea>
+      </div>
+      <div>
+        <label>Accept:</label> <input type="checkbox" v-model="accept">
+      </div>
+      <div>
+        <label>Yes/No:</label>
+        <input type="radio" value="Yes" v-model="yesNo"> Yes
+        <input type="radio" value="No" v-model="yesNo"> No
+      </div>
+    </form>
+  </div>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        name: 'Darren',
+        desc: 'Udemy student',
+        accept: true,
+        yesNo: 'No'
+      }
+    })
+  </script>
+</body>
+
+<style>
+  div {
+    padding-bottom: 1rem;
+  }
+
+  label {
+    min-width: 100px;
+    display: inline-block;
+  }
+</style>
+
+</html>

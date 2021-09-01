@@ -1,0 +1,58 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Class Bindings</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.js"
+    integrity="sha256-kzv+r6dLqmz7iYuR2OdwUgl4X5RVsoENBzigdF5cxtU=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!--Appel de la classe computed pour appliquer un effet de style au paragraphe-->
+    <p :class="classObject">This text will change colors!</p>
+
+    <p :class="testo">Vue Js c'est sympa</p>
+  </div>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        redBg: true,
+        whiteText: true
+      },
+      computed: {
+        classObject: function () {
+          return {
+            'red-bg': this.redBg,
+            white: this.whiteText
+          }
+        },
+
+        testo: function(){
+          return{
+            test:true
+          }
+        }
+      }
+    })
+  </script>
+</body>
+<style>
+  .red-bg {
+    background-color: red;
+  }
+
+  .test {
+    background-color: yellow;
+  }
+
+  .white {
+    color: white;
+  }
+</style>
+
+</html>

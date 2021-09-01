@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Le Tueur de Monstre</h1>
+    </header>
+    <div id="game">
+      <section id="monster" class="container">
+        <h2>Barre de vie du Monstre</h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style="lifeBarM"></div>
+        </div>
+      </section>
+      <section id="player" class="container">
+        <h2>Ta Barre de vie</h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style="lifeBarJ"></div>
+        </div>
+      </section>
+      <section class="container" v-if="gagnant">
+        <h1>Combat Terminé</h1>
+        <h2 v-if="gagnant === 'monstre'">Tu Perds !!</h2>
+        <h2 v-else-if="gagnant === 'joueur'">Tu Gagnes!!</h2>
+        <h2 v-else>Carnage Tout le monde est mort !!</h2>
+        <button @click="startPartie">Chassé nouveau Monstre</button>
+      </section>
+      <section id="controls" v-else>
+        <button @click="attaquerMonstre">ATTAQUE</button>
+        <button :disabled="useSAttaque" @click="attaqueSpécialJ">ATTAQUE SPÉCIALE</button>
+        <button @click="soinJoueur">SOIN</button>
+        <button @click="abandonner">SE RENDRE</button>
+      </section>
+      <section id="log" class="container">
+        <h2>Historique de la Bataille</h2>
+        <ul>
+          <li v-for="log in historique">
+            <span :class="{'log--player': log.actionPar==='joueur','log--monster': log.actionPar==='monstre'}"
+            >{{log.actionPar === 'joueur' ? 'Joueur' : 'Monstre'}} - </span>
+            <span v-if="log.actionType==='Soin'"> se soigne pour <span class="log--heal">{{log.actionValeur}}</span></span>
+            <span v-else> à attaquer et à infliger <span class="log--damage">{{log.actionValeur}}</span></span>
+
+          </li>
+        </ul>
+      </section>
+    </div>
+  </body>
+</html>

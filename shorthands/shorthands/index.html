@@ -1,0 +1,40 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Shorthands</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.js"
+    integrity="sha256-kzv+r6dLqmz7iYuR2OdwUgl4X5RVsoENBzigdF5cxtU=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div><a v-bind:href="url">Click me!</a></div>
+    <div><a :href="url">Click me!</a></div> <!--Shortland sintaxt du v-bind très pratique-->
+    <div><a :[key]="url">Click me!</a></div> <!--var key= href et comme elle équivaut à un shortland syntaxt il fait href -->
+
+    <div><a v-on:click="doSomething">Click me!</a></div>
+    <div><a @click="doSomething">Click me!</a></div> <!--Shortland syntaxte pour v-on => @click-->
+    <div><a @[event]="doSomething">Click me!</a></div> <!--S syntaxte too (idem que Key)-->
+  </div>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        url: 'https://google.com',
+        event: 'click',
+        key: 'href'
+      },
+      methods: {
+        doSomething() {
+          alert('You did it!');
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

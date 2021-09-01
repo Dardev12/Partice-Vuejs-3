@@ -1,0 +1,57 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Rendering Lists</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.js"
+    integrity="sha256-kzv+r6dLqmz7iYuR2OdwUgl4X5RVsoENBzigdF5cxtU=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div id="app">
+    <ul>
+      <!--v-for pour boucle ("une fourmis dans  fourmillière") :key donne une id au li crée-->
+      <!--le v-for fait un nouveau re render si de nouvelle donnée on était insérer-->
+      <li v-for="pizza in pizzas" :key="pizza.id">
+        {{ pizza.name }} ({{ pizza.price }}€)
+      </li>
+    </ul>
+    <div>
+      New pizza name <input v-model="name" />,
+      price <input v-model="price" />
+      <button @click="addPizza">Add</button>
+    </div>
+  </div>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        name: null,
+        price: null,
+        //List []
+        pizzas: [
+          { id: 1, name: 'Margherita', price: 5 },
+          { id: 2, name: 'Marinara', price: 6 },
+          { id: 3, name: 'Capricciosa', price: 7.5 }
+        ]
+      },
+      methods: {
+        addPizza() {
+          //Pour ajouter dans liste on fait un push 
+          this.pizzas.push({
+            id: this.pizzas.length + 1,
+            //Prend les donnée capturé dans le v-model 
+            name: this.name,
+            price: Number(this.price)
+          })
+          this.name = this.price = null;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

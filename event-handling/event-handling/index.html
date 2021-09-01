@@ -1,0 +1,57 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Event Handling</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.js"
+    integrity="sha256-kzv+r6dLqmz7iYuR2OdwUgl4X5RVsoENBzigdF5cxtU=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div id="app">
+    <button v-on:click="counter += 1">Add 1</button>
+    <p>The button has been clicked {{ counter }} times.</p>
+    <p v-if="counter % 5 == 0 && counter > 0">Go on, click 5 more!</p>
+    <p>
+      <button v-on:click="sayHi" id="btn1">HI!</button>
+    </p>
+    <p>
+      <button v-on:click="say('Hello there!', $event)" id="btn2">Hello!</button>
+    </p>
+    <!--self permet de trigger juste l'élément concerner et  ainsi éviter à ces enfant si il est relié de les appeller-->
+    <div v-on:click.self="say('Top', $event)" id="top">
+      Top
+      <div v-on:click="say('Second', $event)" id="second">Second
+        <!--stop permet d'arreter la propagation de l'event handler-->
+        <div v-on:click.stop="say('Deep', $event)" id="deep">Deep</div>
+      </div>
+      <!-- Il y a plein de event modifier
+      lien: https://vuejs.org/v2/guide/events.html#Event-Modifiers
+      https://vueschool.io/courses/the-vuejs-3-master-class
+      -->
+    </div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        counter: 0
+      },
+      methods: {
+        sayHi(event) {
+          alert('Hi there!');
+          alert(event.target.tagName);
+        },
+        say(message, event) {
+          alert(message);
+          alert(event.target.id);
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

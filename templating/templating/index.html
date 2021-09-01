@@ -1,0 +1,60 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Templating</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.js"
+    integrity="sha256-kzv+r6dLqmz7iYuR2OdwUgl4X5RVsoENBzigdF5cxtU=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p>Message: {{ msg }}</p>
+
+    <p v-once>This will never change: {{ msg }}</p> <!--v-once Appel cette valeur une fois et ne changeras pas même si celle ci obtient une nouvelle valeur-->
+
+    <p>Outputting raw HTML: <span v-html="rawHtml"></span></p> <!--v html= permet d'appeller variable contenant du html-->
+    <p>{{ rawHtml }}</p>
+
+    <button v-bind:disabled="disabled">Click me!</button> disable le button 
+
+    <p>{{ number + 1 }}</p>
+    <p>{{ isOk ? 'YES' : 'NO' }}</p>
+    <p>{{ msg.split('').reverse().join('') }}</p>
+
+    <p v-if="show">You will see this text</p>
+
+    <p><a v-bind:href="url">A link with dynamic URL</a></p> <!--v-bind peut aussi fournir le href-->
+    <p><a v-on:click="doIt">Click this to run doIt() method</a></p>
+    <p>
+      <a v-on:[eventname]="doIt"> <!--v-on encadre eventname pour préciser que si celui change dans la fonction appeller et bien de l'appliquer au code directement-->
+        The event will be evaluted dynamically: {{ eventname }}</a>
+    </p>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        number: 2,
+        msg: "I'll be back!",
+        rawHtml: '<span style="color:purple;">This is red!</span>',
+        disabled: false,
+        isOk: true,
+        show: true,
+        url: 'https://google.com',
+        eventname: 'click'
+      },
+      methods: {
+        doIt() {
+          alert('You did it!');
+          this.eventname ='je suis un boss';
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
